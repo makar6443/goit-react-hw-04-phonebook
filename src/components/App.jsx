@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useLocalStorage } from './hooks/hooks.js';
 import shortid from 'shortid';
 import Notiflix from 'notiflix';
 
@@ -17,18 +18,6 @@ export const App = () => {
         contact.name.toLowerCase().includes(filter)
       ),
     ];
-  }
-
-  function useLocalStorage(defaultValue) {
-    const [state, setState] = useState(
-      () => JSON.parse(localStorage.getItem('contacts')) ?? defaultValue
-    );
-
-    useEffect(() => {
-      localStorage.setItem('contacts', JSON.stringify(state));
-    }, [state]);
-
-    return [state, setState];
   }
   
   const addContactHandler = ({ name, number }) => {
